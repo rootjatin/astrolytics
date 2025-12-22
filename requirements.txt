@@ -1,4 +1,0 @@
-numpy>=1.23
-matplotlib>=3.7
-astropy>=5.3
-imageio>=2.31
