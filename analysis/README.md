@@ -538,7 +538,7 @@ model_fit = fit(model0, xx, yy, cut.data)
 model_fit
 ```
 
-For transient search, the notebook should teach **WCS refinement → PSF matching → flux scaling → subtraction → significance testing → DQ inspection**, never raw image subtraction by eye. Photutils exposes PSF-matching utilities, and the JWST pipeline provides stage-3 outlier-detection logic for imaging associations that is useful background reading. citeturn24search2turn24search4turn25search15turn24search1
+For transient search, the notebook should teach **WCS refinement → PSF matching → flux scaling → subtraction → significance testing → DQ inspection**, never raw image subtraction by eye. Photutils exposes PSF-matching utilities, and the JWST pipeline provides stage-3 outlier-detection logic for imaging associations that is useful background reading. 
 
 ## Tool comparison and recommended stack
 
@@ -554,7 +554,7 @@ The most useful comparison table is not “which package is best”, but **which
 | **GALFIT** | Excellent 2-D parametric galaxy fitting and multi-component decomposition | Sensitive to sky, sigma image, PSF mismatch, neighbour masks, and initial guesses | External structural-fitting chapter after the main Python catalogue exists | citeturn8search3turn6search5turn6search9 |
 | **ProFound** | Strong segmentation-led approach, good for irregular extended sources, natural hand-off to ProFit | R-first ecosystem rather than pure Python; less straightforward for a JWST-first Python notebook | Comparative note for irregular galaxies and extended low-surface-brightness work | citeturn23search0turn23search1 |
 
-My recommendation for the actual notebook is therefore: **Astroquery + Astropy + Photutils** as the backbone, **SEP** as the alternative detector, **Scikit-image** for additional morphology and region measurements, **Scikit-learn** for explicit pedagogical classifiers and photo-z baselines, **Reproject** for common-grid resampling, and **STPSF** for PSF-informed work. Bring in **SExtractor**, **SourceXtractor++**, or **GALFIT** only in advanced modules or comparison chapters, not as the first notebook path. That split keeps the notebook readable for novices while remaining scientifically serious. citeturn14search1turn4search11turn1search1turn17search1turn1search14turn4search1turn5search2
+My recommendation for the actual notebook is therefore: **Astroquery + Astropy + Photutils** as the backbone, **SEP** as the alternative detector, **Scikit-image** for additional morphology and region measurements, **Scikit-learn** for explicit pedagogical classifiers and photo-z baselines, **Reproject** for common-grid resampling, and **STPSF** for PSF-informed work. Bring in **SExtractor**, **SourceXtractor++**, or **GALFIT** only in advanced modules or comparison chapters, not as the first notebook path. That split keeps the notebook readable for novices while remaining scientifically serious. 
 
 ## Quality assurance, reproducibility and deliverables
 
@@ -587,7 +587,7 @@ A sensible set of deliverables is:
 | Segmentation maps | FITS | Audit detection/deblending choices | Save label map and parent-child relationships if relevant |
 | Written report | Markdown, HTML, or PDF | Executive summary, interpretation, limitations, provenance | Generate after catalogue QA, not before |
 
-The written report itself should open with an **executive summary**, then move through **data provenance**, **selection criteria**, **measurement methods**, **classification logic**, **derived science products**, **sensitivity/completeness limits**, **main interpretations**, and **known limitations**. That matches the way the official archive and pipeline documentation are structured: first establish what data you used, then what processing stage they are in, then what inferences they justify. citeturn0search0turn13search5turn5search3
+The written report itself should open with an **executive summary**, then move through **data provenance**, **selection criteria**, **measurement methods**, **classification logic**, **derived science products**, **sensitivity/completeness limits**, **main interpretations**, and **known limitations**. That matches the way the official archive and pipeline documentation are structured: first establish what data you used, then what processing stage they are in, then what inferences they justify. 
 
 For a novice, the most reproducible execution checklist is:
 
@@ -600,6 +600,6 @@ For a novice, the most reproducible execution checklist is:
 - align bands on a common WCS, remembering that reprojection is not registration correction. citeturn24search1turn2search3  
 - perform forced multiband photometry and compute colours before attempting star–galaxy separation or photo-z estimation. citeturn11search3turn9search3  
 - validate catalogue depth and purity with injection/recovery and false-positive tests, not by eye alone. citeturn19search1turn11search2  
-- export catalogues, plots, cutouts, and a written report that states clearly which product stage and calibration assumptions were used. citeturn13search5turn28search0turn28search13
+- export catalogues, plots, cutouts, and a written report that states clearly which product stage and calibration assumptions were used. 
 
-The overall conclusion is that a **very detailed pedagogical notebook is entirely feasible without choosing a specific target now**, provided it is designed around **public JWST imaging products**, **explicit stage awareness**, **parallel implementations of detection/measurement**, **transparent quality control**, and **science products that are traceable back to catalogue-level evidence**. That is the combination most likely to teach a novice what information can truly be extracted from MAST-hosted JWST data, while still giving an advanced user a credible foundation for publication-grade follow-up. citeturn0search12turn0search17turn14search1turn13search5
+The overall conclusion is that a **very detailed pedagogical notebook is entirely feasible without choosing a specific target now**, provided it is designed around **public JWST imaging products**, **explicit stage awareness**, **parallel implementations of detection/measurement**, **transparent quality control**, and **science products that are traceable back to catalogue-level evidence**. That is the combination most likely to teach a novice what information can truly be extracted from MAST-hosted JWST data, while still giving an advanced user a credible foundation for publication-grade follow-up. 
