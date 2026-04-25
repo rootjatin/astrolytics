@@ -591,15 +591,15 @@ The written report itself should open with an **executive summary**, then move t
 
 For a novice, the most reproducible execution checklist is:
 
-- install and freeze the environment before querying MAST; save a JSON manifest of package versions. citeturn0search0turn26search6  
-- query MAST for **public JWST imaging** only, and record both the discovery query and the returned product names. citeturn0search4turn14search1  
-- prefer `i2d` for the main notebook path, but inspect `rate`/`cal` examples so you understand where noise and calibration information enter. citeturn13search5turn5search0  
-- inspect `SCI`, `ERR`, `DQ`, `VAR_POISSON`, `VAR_RNOISE`, `VAR_FLAT`, and `AREA` whenever present. citeturn5search0turn3search0  
-- estimate background and RMS before detection, and compare a Photutils branch to an SEP branch at least once. citeturn3search15turn1search1turn12search6  
-- build a segmentation catalogue, then add aperture and optional PSF photometry. citeturn12search6turn3search18  
-- align bands on a common WCS, remembering that reprojection is not registration correction. citeturn24search1turn2search3  
-- perform forced multiband photometry and compute colours before attempting star–galaxy separation or photo-z estimation. citeturn11search3turn9search3  
-- validate catalogue depth and purity with injection/recovery and false-positive tests, not by eye alone. citeturn19search1turn11search2  
+- install and freeze the environment before querying MAST; save a JSON manifest of package versions. 
+- query MAST for **public JWST imaging** only, and record both the discovery query and the returned product names. 
+- prefer `i2d` for the main notebook path, but inspect `rate`/`cal` examples so you understand where noise and calibration information enter. 
+- inspect `SCI`, `ERR`, `DQ`, `VAR_POISSON`, `VAR_RNOISE`, `VAR_FLAT`, and `AREA` whenever present. 
+- estimate background and RMS before detection, and compare a Photutils branch to an SEP branch at least once. 
+- build a segmentation catalogue, then add aperture and optional PSF photometry. 
+- align bands on a common WCS, remembering that reprojection is not registration correction.
+- perform forced multiband photometry and compute colours before attempting star–galaxy separation or photo-z estimation.
+- validate catalogue depth and purity with injection/recovery and false-positive tests, not by eye alone.  
 - export catalogues, plots, cutouts, and a written report that states clearly which product stage and calibration assumptions were used. 
 
 The overall conclusion is that a **very detailed pedagogical notebook is entirely feasible without choosing a specific target now**, provided it is designed around **public JWST imaging products**, **explicit stage awareness**, **parallel implementations of detection/measurement**, **transparent quality control**, and **science products that are traceable back to catalogue-level evidence**. That is the combination most likely to teach a novice what information can truly be extracted from MAST-hosted JWST data, while still giving an advanced user a credible foundation for publication-grade follow-up. 
