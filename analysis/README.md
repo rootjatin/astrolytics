@@ -2,17 +2,17 @@
 
 ## Executive summary
 
-I am treating “JSW” as **JWST**. The strongest design for a target-agnostic teaching notebook is a **MAST-first, public-data workflow** that begins with archive discovery, uses **stage-3 imaging products** for the main scientific notebook path, and exposes **stage-1 and stage-2 branches** when you want to teach detector artefacts, uncertainty propagation, and calibration choices. The official JWST documentation states that MAST hosts JWST data at all processing levels, that archive products are reprocessed on a quarterly build cadence, and that the standard product ladder includes `uncal`, `rate`, `cal`, and resampled stage-3 products such as `i2d`, `s2d`, and `s3d`. citeturn0search0turn13search3turn13search8turn13search1
+I am treating “JSW” as **JWST**. The strongest design for a target-agnostic teaching notebook is a **MAST-first, public-data workflow** that begins with archive discovery, uses **stage-3 imaging products** for the main scientific notebook path, and exposes **stage-1 and stage-2 branches** when you want to teach detector artefacts, uncertainty propagation, and calibration choices. The official JWST documentation states that MAST hosts JWST data at all processing levels, that archive products are reprocessed on a quarterly build cadence, and that the standard product ladder includes `uncal`, `rate`, `cal`, and resampled stage-3 products such as `i2d`, `s2d`, and `s3d`. 
 
-For the core notebook, the most teachable branch is: **discover public imaging observations → filter products → inspect FITS/HDU structure → build a cleaned science image and variance model → detect and deblend sources → measure photometry and morphology → align bands → do forced multiband photometry → classify stars versus galaxies → cross-match external catalogues → derive science products → export catalogues and a written report**. That sequence aligns closely with the official guidance from entity["organization","Space Telescope Science Institute","baltimore, md, us"], the JWST pipeline documentation, and the Astropy/Photutils ecosystem. citeturn14search1turn13search5turn5search0turn2search3turn4search11turn17search4
+For the core notebook, the most teachable branch is: **discover public imaging observations → filter products → inspect FITS/HDU structure → build a cleaned science image and variance model → detect and deblend sources → measure photometry and morphology → align bands → do forced multiband photometry → classify stars versus galaxies → cross-match external catalogues → derive science products → export catalogues and a written report**. That sequence aligns closely with the official guidance from entity["organization","Space Telescope Science Institute","baltimore, md, us"], the JWST pipeline documentation, and the Astropy/Photutils ecosystem. 
 
 The baseline notebook already created in this conversation is a good foundation because it already implements MAST-first discovery, product filtering, FITS inspection, WCS alignment, background subtraction, aperture photometry, radial profiles, and RGB quicklooks; what follows is the research-backed way to expand it into a much more complete scientific teaching notebook and a rigorous analytical report. fileciteturn0file0
 
-The clearest pedagogical stance is to make the notebook **explicitly target-agnostic** until a target is supplied later. That means parameterising `target_name`, `coordinates`, `radius`, `instrument`, `filter_set`, `product_suffix`, `download_limit`, and `catalogue-match radius`, while also including a “known good public imaging field” fallback for demonstration only. MAST’s own primer and the Astroquery MAST documentation both support this discovery-first style. citeturn0search4turn14search0turn14search1
+The clearest pedagogical stance is to make the notebook **explicitly target-agnostic** until a target is supplied later. That means parameterising `target_name`, `coordinates`, `radius`, `instrument`, `filter_set`, `product_suffix`, `download_limit`, and `catalogue-match radius`, while also including a “known good public imaging field” fallback for demonstration only. MAST’s own primer and the Astroquery MAST documentation both support this discovery-first style.
 
 ## Notebook architecture and data access
 
-The notebook should have **two parallel teaching tracks**. The first is the **science-ready track**, which starts from stage-3 `i2d` images and is the default for novices. The second is the **pipeline-awareness track**, which optionally steps back to `rate` or `cal` products to show where correlated read noise, data-quality flags, variance arrays, and photometric conversion enter the data model. That separation matters because the JWST documentation makes clear that different suffixes correspond to different processing stages and sometimes different units. citeturn13search5turn13search2turn5search0turn3search0
+The notebook should have **two parallel teaching tracks**. The first is the **science-ready track**, which starts from stage-3 `i2d` images and is the default for novices. The second is the **pipeline-awareness track**, which optionally steps back to `rate` or `cal` products to show where correlated read noise, data-quality flags, variance arrays, and photometric conversion enter the data model. That separation matters because the JWST documentation makes clear that different suffixes correspond to different processing stages and sometimes different units. 
 
 | Product suffix | What it contains | Best teaching use | Sources |
 |---|---|---|---|
@@ -22,14 +22,14 @@ The notebook should have **two parallel teaching tracks**. The first is the **sc
 | `i2d` | Resampled 2-D stage-3 image, usually the cleanest entry point for imaging | Default notebook path for source detection, colours, morphology, cutouts, plots | citeturn13search5turn13search2turn13search1 |
 | `segm` / `cat` / `phot` | Pipeline segmentation maps and catalogues when produced | Comparison products, not the only science catalogue | citeturn13search5 |
 
-A novice-friendly notebook should begin with a single environment cell that installs the core Python stack, plus an optional PSF stack. The official documentation for Astroquery, Astropy, Photutils, SEP, Reproject, and STPSF supports exactly the capabilities needed here: archive search, FITS I/O, WCS transforms, segmentation, PSF photometry, reprojection, and model PSFs. citeturn14search1turn2search10turn2search3turn4search11turn1search1turn4search1turn5search2turn5search5
+A novice-friendly notebook should begin with a single environment cell that installs the core Python stack, plus an optional PSF stack. The official documentation for Astroquery, Astropy, Photutils, SEP, Reproject, and STPSF supports exactly the capabilities needed here: archive search, FITS I/O, WCS transforms, segmentation, PSF photometry, reprojection, and model PSFs.
 
 ```python
 %pip install -U astroquery astropy photutils sep scikit-image scikit-learn \
     reproject pyarrow pandas scipy matplotlib tqdm stpsf
 ```
 
-The next cell should capture the software environment and notebook provenance before doing any science. This is essential because JWST products are reprocessed over time, Astroquery continues to evolve, and any serious report must record the package versions that produced the results. MAST’s own JWST access documentation explicitly notes the quarterly update cadence for reprocessed products. citeturn0search0turn26search6
+The next cell should capture the software environment and notebook provenance before doing any science. This is essential because JWST products are reprocessed over time, Astroquery continues to evolve, and any serious report must record the package versions that produced the results. MAST’s own JWST access documentation explicitly notes the quarterly update cadence for reprocessed products. 
 
 ```python
 import json
@@ -54,7 +54,7 @@ with open("environment_manifest.json", "w") as f:
 env
 ```
 
-For data discovery, the notebook should use `astroquery.mast.Observations` rather than raw HTTP calls, because the official Astroquery MAST interface already exposes observation queries, product listing, product filtering, and cloud-backed public downloads. One common pitfall worth teaching explicitly is that `get_product_list` expects **`obsid`**, not **`obs_id`**. citeturn14search0turn14search1turn26search1
+For data discovery, the notebook should use `astroquery.mast.Observations` rather than raw HTTP calls, because the official Astroquery MAST interface already exposes observation queries, product listing, product filtering, and cloud-backed public downloads. One common pitfall worth teaching explicitly is that `get_product_list` expects **`obsid`**, not **`obs_id`**. 
 
 ```python
 from astroquery.mast import Observations
@@ -75,7 +75,7 @@ obs = obs[
 obs[:5]
 ```
 
-A second discovery cell should demonstrate richer metadata filtering. This is where you teach the user to think like an archive scientist: mission, instrument, product level, filters, date ranges, exposure time, and public/private state. Astroquery’s `query_criteria` and metadata access exist precisely for this pattern. citeturn14search0turn14search1
+A second discovery cell should demonstrate richer metadata filtering. This is where you teach the user to think like an archive scientist: mission, instrument, product level, filters, date ranges, exposure time, and public/private state. Astroquery’s `query_criteria` and metadata access exist precisely for this pattern.
 
 ```python
 obs2 = Observations.query_criteria(
@@ -87,7 +87,7 @@ obs2 = Observations.query_criteria(
 obs2[:5]
 ```
 
-Product retrieval should then teach three ideas: **product list expansion**, **server-side filtering**, and **download strategy**. The documentation shows that `get_product_list`, `filter_products`, `download_products`, `list_cloud_datasets`, and cloud-aware download options all exist for exactly this reason. citeturn14search0turn26search1turn26search5
+Product retrieval should then teach three ideas: **product list expansion**, **server-side filtering**, and **download strategy**. The documentation shows that `get_product_list`, `filter_products`, `download_products`, `list_cloud_datasets`, and cloud-aware download options all exist for exactly this reason. 
 
 ```python
 # Optional: enable cloud-hosted public datasets when available
@@ -106,7 +106,7 @@ manifest = Observations.download_products(Table(rows=keep), download_dir="mast_d
 manifest[:5]
 ```
 
-The first FITS-handling cell should then show how JWST science products are structured and how to retrieve `SCI`, `ERR`, `DQ`, and variance arrays when present. Astropy’s FITS and WCS docs, together with JWST science-product documentation, support this exact teaching pattern. citeturn2search2turn0search6turn5search0turn5search3
+The first FITS-handling cell should then show how JWST science products are structured and how to retrieve `SCI`, `ERR`, `DQ`, and variance arrays when present. Astropy’s FITS and WCS docs, together with JWST science-product documentation, support this exact teaching pattern. 
 
 ```python
 from astropy.io import fits
@@ -132,8 +132,7 @@ cut.data.shape
 
 ## Analysis workflow and core measurement cells
 
-The official JWST and Photutils documentation strongly suggest that a good notebook should not jump straight from image display to source measurement. It should first make explicit the chain **masking → background estimation → noise model → detection threshold → segmentation → deblending → catalogue construction**. That is the conceptual hinge that turns a pretty image notebook into a scientific analysis notebook. citeturn3search15turn12search6turn17search0turn5search0
-
+The official JWST and Photutils documentation strongly suggest that a good notebook should not jump straight from image display to source measurement. It should first make explicit the chain **masking → background estimation → noise model → detection threshold → segmentation → deblending → catalogue construction**. That is the conceptual hinge that turns a pretty image notebook into a scientific analysis notebook. 
 ```mermaid
 flowchart TD
     A[Query MAST and select products] --> B[Open FITS and inspect SCI ERR DQ VAR]
