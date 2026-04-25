@@ -439,8 +439,7 @@ with fits.open("mast_data/filter_A_i2d.fits") as hdu_ref, fits.open("mast_data/f
 aligned_B, footprint = reproject_interp((mov_data, mov_wcs), ref_wcs, shape_out=ref_data.shape)
 ```
 
-External cross-matching should be demonstrated with three archives. For bright stars and an absolute astrometric tie, use the **Gaia Archive** exposed either through Astroquery or through the entity["organization","European Space Agency","space agency"] Gaia services. For optical colour context and shape information over wide areas, use **Pan-STARRS** via MAST’s catalogue services. For fields within its footprint and for small object lists especially, use **SDSS** via SkyServer Cross-ID or Astroquery’s SDSS interface. citeturn15search0turn15search7turn16search1turn16search2turn15search2turn27search0
-
+External cross-matching should be demonstrated with three archives. For bright stars and an absolute astrometric tie, use the **Gaia Archive** exposed either through Astroquery or through the entity["organization","European Space Agency","space agency"] Gaia services. For optical colour context and shape information over wide areas, use **Pan-STARRS** via MAST’s catalogue services. For fields within its footprint and for small object lists especially, use **SDSS** via SkyServer Cross-ID or Astroquery’s SDSS interface. 
 ```python
 # Gaia cross-match
 from astroquery.gaia import Gaia
