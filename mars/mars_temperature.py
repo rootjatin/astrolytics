@@ -85,7 +85,18 @@ BASENAME = "the_real_temperature_of_mars_for_one_year"
 # not recomputed from the raw one-second REMS tables.
 DEFAULT_BINS = [
     # sol_center, max air temperature °C, min air temperature °C, season
-
+    (27.8, -9.3, -71.2, "Spring"),
+    (83.5, -5.4, -69.5, "Spring"),
+    (139.1, -3.6, -64.7, "Spring"),
+    (194.8, -3.5, -62.8, "Summer"),
+    (250.4, -4.7, -63.7, "Summer"),
+    (306.1, -5.6, -65.5, "Summer"),
+    (361.7, -5.5, -66.7, "Autumn"),
+    (417.4, -8.9, -72.4, "Autumn"),
+    (473.0, -19.1, -75.3, "Autumn"),
+    (528.7, -27.9, -80.5, "Winter"),
+    (584.3, -27.1, -80.8, "Winter"),
+    (640.0, -22.3, -78.4, "Winter"),
 ]
 
 SOURCE_URLS = {
