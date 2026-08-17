@@ -14,7 +14,12 @@ uses the first 12 bars (Curiosity's first Martian year) and keeps the scope
 explicitly location-specific: air temperature at Gale Crater, not a global
 Mars temperature.
 
+Published source:
+https://science.nasa.gov/resource/seasonal-cycles-in-curiositys-first-two-martian-years/
 
+Underlying instrument archive:
+NASA PDS, MSL-M-REMS-4-ENVRDR-V1.0
+https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=MSL-M-REMS-4-ENVRDR-V1.0
 
 Modes
 -----
