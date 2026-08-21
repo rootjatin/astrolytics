@@ -36,7 +36,11 @@ Science notes
   not physical edges of the universe.
 - This is a visual map, not a precision cosmological analysis.
 
-
+Offline behaviour
+-----------------
+If SkyServer is unreachable, the script uses a clearly labelled deterministic
+fixture containing clustered knots, filaments, walls, voids, and survey gaps.
+The fixture is for preview/layout validation only and is not observational data.
 
 Recommended install
 -------------------
