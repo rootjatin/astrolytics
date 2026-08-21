@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 """
+Result : https://youtube.com/shorts/0fEMufm1VBo
 Thousands of Galaxies, One Map — cinematic YouTube Short renderer
 
 Creates a vertical 1080x1920 astronomy short from public Sloan Digital Sky
