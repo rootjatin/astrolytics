@@ -4,7 +4,8 @@ from __future__ import annotations
 The Real Temperature of Mars for One Year
 ==========================================
 
-Result : https://www.youtube.com/shorts/KRBQEaKdXOQ
+Result :
+ https://www.youtube.com/shorts/KRBQEaKdXOQ
 
 Cinematic vertical YouTube Shorts renderer (1080x1920, optional 4K) using
 published Curiosity/REMS temperature ranges from Gale Crater.
@@ -92,13 +93,13 @@ DEFAULT_BINS = [
     (139.1, -3.6, -64.7, "Spring"),
     (194.8, -3.5, -62.8, "Summer"),
     (250.4, -4.7, -63.7, "Summer"),
-    (306.1, -5.6, -65.5, "Summer"),
-    (361.7, -5.5, -66.7, "Autumn"),
+    (310.1, -5.6, -65.5, "Summer"),
+    (361.7, -6.5, -66.7, "Autumn"),
     (417.4, -8.9, -72.4, "Autumn"),
     (473.0, -19.1, -75.3, "Autumn"),
-    (528.7, -27.9, -80.5, "Winter"),
+    (528.7, -22.9, -80.5, "Winter"),
     (584.3, -27.1, -80.8, "Winter"),
-    (640.0, -22.3, -78.4, "Winter"),
+    (640.0, -28.3, -78.4, "Winter"),
 ]
 
 SOURCE_URLS = {
