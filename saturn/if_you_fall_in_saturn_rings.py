@@ -68,4 +68,20 @@ shots=[
     Shot('outro',51,58,'So falling through Saturn’s rings would be spectacular — not a crash into a plate, but a trip through a sparse, glittering particle stream.')
 ]
 
+spec=Spec(
+    title='FALLING THROUGH SATURN\'S RINGS',
+    subtitle='approach // particle stream // ring shadows',
+    basename='falling_through_saturns_rings',
+    shots=shots,
+    draw=draw,
+    notes=[
+        'Saturn’s rings are extremely broad but vertically thin and mostly empty space.',
+        'The ring material is primarily water ice ranging from tiny grains to larger chunks.',
+        'This cinematic rendering emphasizes the subjective experience of passing through the ring plane.'
+    ]
+)
+
+
+if __name__ == "__main__":
+    run_cli(spec)
 
