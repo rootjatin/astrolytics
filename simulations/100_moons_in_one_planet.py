@@ -1,6 +1,6 @@
 from cinematic_space_engine_v2 import *
 
-
+#output : https://www.youtube.com/shorts/DvgLqO8k4vw
 def draw(r, img, t, sh, p):
     c=(r.W*0.5, r.H*0.44)
     if sh.name == 'reveal':
