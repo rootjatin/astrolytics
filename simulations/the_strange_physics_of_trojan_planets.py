@@ -96,3 +96,10 @@ spec = Spec(
         'This video illustrates gravitational geometry rather than claiming a confirmed Trojan Earth analogue.'
     ]
 )
+
+
+
+
+if __name__ == "__main__":
+    run_cli(spec)
+
