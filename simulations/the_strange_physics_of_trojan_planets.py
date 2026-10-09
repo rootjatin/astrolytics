@@ -1,6 +1,6 @@
 from cinematic_space_engine_v2 import *
 
-output : https://youtube.com/shorts/HiJMSS9Wo00?feature=share
+#output : https://youtube.com/shorts/HiJMSS9Wo00?feature=share
 def draw(r, img, t, sh, p):
     c = (r.W*0.5, r.H*0.43)
     R = r.W*0.30
