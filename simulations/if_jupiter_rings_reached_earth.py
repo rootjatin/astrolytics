@@ -72,3 +72,7 @@ spec=Spec(
     ]
 )
 
+
+
+if __name__ == "__main__":
+    run_cli(spec)
