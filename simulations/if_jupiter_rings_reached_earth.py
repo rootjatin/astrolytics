@@ -1,7 +1,7 @@
 
 from cinematic_space_engine_v2 import *
 
-
+# outuput : https://www.youtube.com/shorts/uMtoOML5agA
 def draw(r, img, t, sh, p):
     earth = (r.W*0.5, r.H*0.47)
     if sh.name == 'scale_reveal':
