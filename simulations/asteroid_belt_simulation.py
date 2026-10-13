@@ -3,6 +3,7 @@
 # No images, fonts, soundtracks, ephemerides, network access, or helper .py files required.
 # Install: python -m pip install numpy opencv-python pillow
 # System recommendation: ffmpeg; espeak for optional offline voice-over.
+#Output : https://www.youtube.com/shorts/hm-N7VSz1lo
 import argparse
 import json
 import math
