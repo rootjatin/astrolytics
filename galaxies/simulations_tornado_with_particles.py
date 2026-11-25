@@ -580,5 +580,5 @@ def scene(state,t):
             tag(im,(502,540),"UPDRAFT",rgb("f1eedc"),15,align="right")
     return im
 
-
-
+if __name__ == "__main__":
+    main()
