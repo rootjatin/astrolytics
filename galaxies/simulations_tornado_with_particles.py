@@ -578,4 +578,7 @@ def scene(state,t):
         if t>17:
             arrow(im,(434,528),(434,410),rgb("eeead8"),2,.14)
             tag(im,(502,540),"UPDRAFT",rgb("f1eedc"),15,align="right")
+    return im
+
+
 
