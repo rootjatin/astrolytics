@@ -572,3 +572,10 @@ def scene(state,t):
         for first,last in zip(changes[::2],changes[1::2]):
             if last-first>2:
                 path(im,np.c_[xx[first:last],yy[first:last]],rgb("ada289"))
+    if t>5.4:
+        arrow(im,(41,683),(186,678),rgb("f6e2ad"),2,.15)
+        tag(im,(40,699),"NEAR-SURFACE INFLOW",rgb("fae2b7"),14)
+        if t>17:
+            arrow(im,(434,528),(434,410),rgb("eeead8"),2,.14)
+            tag(im,(502,540),"UPDRAFT",rgb("f1eedc"),15,align="right")
+
