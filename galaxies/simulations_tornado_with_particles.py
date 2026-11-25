@@ -2,7 +2,9 @@
 """Render a vertical science Short offline using its supplied narration mix."""
 # Output  : https://youtube.com/shorts/6FLZQ2mEtXQ?feature=share
 '''
-Data Source
+Data Sources
+NOAA National Severe Storms Laboratory — Tornado Basics — https://www.nssl.noaa.gov/education/svrwx101/tornadoes/
+NOAA — Tornado formation — https://www.noaa.gov/education/resource-collections/weather-atmosphere/tornadoes
 '''
 import argparse
 from functools import lru_cache
