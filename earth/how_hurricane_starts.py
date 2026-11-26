@@ -561,4 +561,6 @@ def scene(state,t):
             points=np.c_[270+reach*np.cos(a),461-reach*np.sin(a)]
             path(im,points,rgb("ebefad"),1)
             arrow(im,points[-8],points[-1],rgb("f7f5b9"),2,.6)
+    if t>7:
+        tag(im,(60,708), "N. HEMISPHERE  /  COUNTERCLOCKWISE",rgb("a8e6e3"),15)
 
