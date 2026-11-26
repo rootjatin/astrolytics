@@ -3,7 +3,8 @@
 # Output : https://youtube.com/shorts/QlBAlWaIk0w?feature=share
 '''
 Sources
-
+NOAA Ocean Service — How do hurricanes form? — https://oceanservice.noaa.gov/facts/how-hurricanes-form.html
+NOAA Atlantic Oceanographic and Meteorological Laboratory — Tropical cyclone spin and location — https://www.aoml.noaa.gov/hrd/tcfaq/G4.html
 '''
 import argparse
 from functools import lru_cache
