@@ -563,4 +563,10 @@ def scene(state,t):
             arrow(im,points[-8],points[-1],rgb("f7f5b9"),2,.6)
     if t>7:
         tag(im,(60,708), "N. HEMISPHERE  /  COUNTERCLOCKWISE",rgb("a8e6e3"),15)
+    if t>25:
+        line(im,(271,461),(364,392),rgb("edf8e9"))
+        tag(im,(371,372),"EYE",rgb("f2fff1"),16)
+    return im
+
+
 
