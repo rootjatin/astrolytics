@@ -530,4 +530,35 @@ def setup():
     ocean=.50+noise(1781,(8,20,57),(420,420))*.65
     return bg,r,angle,tex,field,ocean
 
+def scene(state,t):
+    bg,r,angle,tex,cluster,ocean=state
+    im=bg.copy()
+    f=float(smooth((t-4)/23))
+    spin=angle-(.058*t+1.2*f)
+    arms=np.cos(4*spin-11*np.log(r+.19)+4.2*tex)
+    bands=(.27+.73*np.clip((arms+.31)/1.31,0,1)**1.7)*np.exp(-.70*r*r)
+    eye=(1-np.exp(-(r/(.16+.023*f))**4))
+    wall=.37*np.exp(-((r-.205)/.10)**2)
+    storm=f*(.9*bands+wall)*eye
+    patch=np.clip((1-.68*f)*cluster*.64+storm + .19*tex,0,1)
+    gy,gx=np.gradient(patch)
+    shade=np.tanh((gx+gy)*12)
+    raised=np.clip(.57*patch+.44*patch**1.42+.22*shade*patch,0,1.07)
+    sea=material(ocean,(0,.5,1),(rgb("132c44"),rgb("1b4658"),rgb("245363")))
+    cloud=np.asarray(bgr(rgb("e0f1e8")))
+    tile=sea+(cloud-sea.astype(float))*raised[...,None]
+    im[251:671,60:480]=np.uint8(np.clip(tile,0,255))
+    for rad in (69,128,190):
+        dot(im,(270,461),rad,rgb("4b8293"),1)
+    line(im,(60,461),(79,461),rgb("c6ede9"))
+    line(im,(270,651),(270,670),rgb("c6ede9"))
+    path(im,[(60,251),(479,251),(479,670),(60,670)],rgb("5b8f9d"),1,True)
+    if 8<t<25:
+        for i in range(4):
+            u=np.linspace(0,1,65)
+            a=i*math.pi/2+t*.058+1.3*u
+            reach=175-105*u
+            points=np.c_[270+reach*np.cos(a),461-reach*np.sin(a)]
+            path(im,points,rgb("ebefad"),1)
+            arrow(im,points[-8],points[-1],rgb("f7f5b9"),2,.6)
 
