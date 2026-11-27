@@ -571,5 +571,8 @@ def scene(state,t):
         first,last=profile[0,1],profile[int(W*.84),1]
         tag(im,(31,739),f"{first:.1f} m/s",rgb("e8fff1"),20,bold=True)
         tag(im,(464,739),f"{last:.1f} m/s",rgb("243b3f"),20,bold=True,align="right")
+        arrow(im,(164,750),(337,750),rgb("ddf7e4"),2,.13)
+    return im
+
 
 
