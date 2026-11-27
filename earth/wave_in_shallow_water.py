@@ -4,6 +4,8 @@
 # Output : https://www.youtube.com/shorts/RJP8OfBXNkU
 """
 Sources
+TU Delft / LibreTexts — Wave refraction over parallel depth contours — https://geo.libretexts.org/Bookshelves/Oceanography/Coastal_Dynamics_%28Bosboom_and_Stive%29/05%253A_Coastal_hydrodynamics/5.02%253A_Wave_transformation/5.2.3%253A_Refraction
+Holthuijsen — Waves in shallow water, Chapter 7 — https://www.jodc.go.jp/info/ioc_doc/JCOMM_Other/WMO702.pdf
 
 """
 import argparse
