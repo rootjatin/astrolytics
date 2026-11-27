@@ -543,4 +543,33 @@ def setup():
     coastal-=close[...,None]*np.asarray((22,29,30))
     return np.uint8(np.clip(coastal,0,255)),phase,shore,xcurve,seabed
 
+def scene(state,t):
+    bg,phase,shore,profile,bottom=state
+    angle=phase-.57*t
+    waves=np.maximum(0,np.cos(angle))**24
+    coat=np.maximum(0,np.cos(angle-.20))**6
+    wash=(.37+.63*np.clip(.55+1.7*bottom,0,1))*np.exp(-((shore-GRID_X-.054)/.064)**2)
+    edge=smooth((shore-GRID_X)/.055)
+    im=np.uint8(np.clip(bg.astype(np.float32)+waves[...,None]*edge[...,None]*
+                        np.asarray((55.,76.,81.)),0,255))
+    lit(im,.27*coat*edge,rgb("7ed5bb"))
+    lit(im,.83*waves*wash,rgb("ffffe5"))
+    if 7<t<24:
+        xs=np.linspace(65,439,135)
+        slowed=np.interp(xs/W,profile[:,0],profile[:,1])
+        c=slowed/profile[0,1]
+        theta=np.arcsin(math.sin(math.radians(38))*c)
+        ys=521-np.r_[0,np.cumsum(np.tan(theta[:-1])*np.diff(xs))]
+        path(im,np.c_[xs,ys],rgb("edebae"),2)
+        for mark in (20,63,108):
+            arrow(im,(xs[mark],ys[mark]),(xs[mark+8],ys[mark+8]),rgb("fbf4ca"),2,.4)
+        tag(im,(50,537),"DIRECTION OF TRAVEL",rgb("f6eeb9"),14)
+    if t>5.4:
+        tag(im,(35,247),"DEEPER WATER",rgb("e7f6ed"),15)
+        tag(im,(504,247),"SHORE",rgb("544641"),16,align="right")
+        tag(im,(31,717),"WAVE SPEED",rgb("d8f8ee"),14)
+        first,last=profile[0,1],profile[int(W*.84),1]
+        tag(im,(31,739),f"{first:.1f} m/s",rgb("e8fff1"),20,bold=True)
+        tag(im,(464,739),f"{last:.1f} m/s",rgb("243b3f"),20,bold=True,align="right")
+
 
