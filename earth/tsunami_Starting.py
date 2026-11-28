@@ -574,4 +574,6 @@ def scene(state,t):
         tag(im,(510,254),"WAVE SPEED",rgb("c8f4eb"),15,align="right")
         tag(im,(510,285),f"{c[i]*3.6:,.0f} km/h",rgb("ecfff5"),25,"serif",align="right",bold=True)
         tag(im,(31,743),"VERTICAL AND HORIZONTAL SCALES EXAGGERATED",rgb("ecd6ba"),13)
+    return im
+
 
