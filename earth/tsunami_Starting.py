@@ -2,8 +2,9 @@
 """Render a vertical science Short offline using its supplied narration mix."""
 # Output : https://www.youtube.com/shorts/2lCSuZRRuhM
 '''
-Sources
-
+Dataset Sources
+NOAA National Weather Service — About Tsunamis — https://www.weather.gov/safety/tsunami-about
+Holthuijsen — Waves in shallow water, Chapter 7 — https://www.jodc.go.jp/info/ioc_doc/JCOMM_Other/WMO702.pdf
 '''
 import argparse
 from functools import lru_cache
