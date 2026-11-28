@@ -577,3 +577,5 @@ def scene(state,t):
     return im
 
 
+if __name__ == "__main__":
+    main()
