@@ -529,3 +529,49 @@ def setup():
     return bg,x,depth,speed,transit,floor,texture
 
 
+def scene(state,t):
+    bg,x,h,c,transit,floor,texture=state
+    im=bg.copy()
+    # Editorial time warp holds the deep-water passage on screen longer.
+    u=t/DURATION
+    clock=transit[-1]*(.023+.922*(.27*u+.73*u**2.35))
+    phase=(transit-clock)/(.160*transit[-1])
+    pulse=np.exp(-.49*phase*phase)*np.cos(phase*2.5)
+    strength=(h[0]/h)**.25
+    surface=458-24*strength*pulse
+    top=np.interp(XX[0],x,surface)
+    bottom=np.interp(XX[0],x,floor)
+    f=np.clip((YY-top)/(bottom-top),0,1)
+    field=np.clip(.93-f*.81+texture*.16,0,1)
+    tinted=material(field,(0,.46,1),(rgb("173043"),rgb("275068"),rgb("5b858e")))
+    inside=(YY>=top)&(YY<bottom)
+    im[inside]=tinted[inside]
+    for j in range(1,10):
+        level=(j*.095)*floor+(1-j*.095)*surface
+        path(im,np.c_[x,level],blend(rgb("557e8c"),rgb("2a5368"),j/10))
+    rock=material(np.clip(.55+texture*.7+.14*np.sin(YY*.10+XX*.018),0,1),
+                  (0,.5,1),(rgb("343240"),rgb("65574f"),rgb("8c7365")))
+    seabed=YY>=bottom
+    im[seabed]=rock[seabed]
+    path(im,np.c_[x,floor],rgb("b29a84"),2)
+    path(im,np.c_[x,surface],rgb("a5f2eb"),3)
+    line(im,(25,458),(516,458),rgb("a1b9bb"))
+    if 15<t<30:
+        i=np.searchsorted(transit,clock)
+        x0=np.clip(x[i]-32,56,464)
+        top0=np.interp(x0,x,surface)
+        bottom0=np.interp(x0,x,floor)
+        line(im,(x0,top0+5),(x0,bottom0-4),rgb("debe9e"))
+        line(im,(x0-6,top0+5),(x0+6,top0+5),rgb("debe9e"))
+        line(im,(x0-6,bottom0-4),(x0+6,bottom0-4),rgb("debe9e"))
+        tag(im,(x0-28,(top0+bottom0)/2),"DEPTH",rgb("f4d1b4"),13,align="right")
+    if t>5.4:
+        i=np.searchsorted(transit,clock)
+        line(im,(x[i],surface[i]),(x[i],390),rgb("c8f4eb"))
+        dot(im,(x[i],surface[i]),4,rgb("e0ffff"))
+        tag(im,(31,251),"DEPTH UNDER MAIN CREST",rgb("c8f4eb"),15)
+        tag(im,(31,278),f"{h[i]:,.0f} m",rgb("ecfff5"),30,"serif",bold=True)
+        tag(im,(510,254),"WAVE SPEED",rgb("c8f4eb"),15,align="right")
+        tag(im,(510,285),f"{c[i]*3.6:,.0f} km/h",rgb("ecfff5"),25,"serif",align="right",bold=True)
+        tag(im,(31,743),"VERTICAL AND HORIZONTAL SCALES EXAGGERATED",rgb("ecd6ba"),13)
+
